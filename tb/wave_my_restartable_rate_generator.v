@@ -21,7 +21,13 @@ module wave_my_restartable_rate_generator;
     #20;
     run = 1;
 
+    #80;
+    run = 0;
+
     #20;
+    run = 1;
+
+    #80;
     run = 0;
     #20 $finish;
   end
