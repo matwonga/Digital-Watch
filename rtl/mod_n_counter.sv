@@ -19,7 +19,7 @@ module mod_n_counter #(
     input logic clk,
     input logic rst,
     input logic enable,
-    output logic [WIDTH-1:0] count
+    output logic [WIDTH-1:0] count = '0
 );
 
   localparam logic [WIDTH-1:0] One = WIDTH'(1);
