@@ -1,12 +1,12 @@
-// Seven - segment display decoder for hexadecimal digits .
+// seven_segment - display decoder for hexadecimal digits
 //
 // Parameters :
-// ACTIVE_LOW - 1 for active - low LEDs, 0 for active - high .
+// ACTIVE_LOW - 1 for active - low LEDs, 0 for active - high
 //
 // Ports :
-// digit [3:0] - Hexadecimal digit to display (0x0 to 0xF).
-// blank - When high , all segments are turned off.
-// segments [6:0] - Segment outputs [g,f,e,d,c,b,a].
+// digit [3:0] - Hexadecimal digit to display (0x0 to 0xF)
+// blank - When high , all segments are turned off
+// segments [6:0] - Segment outputs [g,f,e,d,c,b,a]
 
 `timescale 1ns / 1ps
 

@@ -2,7 +2,7 @@
 //
 // Parameters:
 // MAX      - Maximum value for the counter
-// WIDTH    - Width of the counter
+// WIDTH    - Binary width of the max value for the counter
 //
 // Ports:
 // clk                  - Clock signal
