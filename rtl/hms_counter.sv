@@ -42,10 +42,8 @@ module hms_counter #(
   logic second_rollover;
   logic minute_rollover;
 
-  always_comb begin
-    second_rollover = (seconds == MaxSeconds);
-    minute_rollover = (minutes == MaxMinutes) && second_rollover;
-  end
+  assign second_rollover = (seconds == MaxSeconds);
+  assign minute_rollover = second_rollover && (minutes == MaxMinutes);
 
   up_down_counter #(
       .MAX  (MaxSeconds),
@@ -62,7 +60,7 @@ module hms_counter #(
       .WIDTH(W_MINUTES)
   ) u_minute (
       .clk(clk),
-      .enable(enable && second_rollover),
+      .enable(second_rollover),
       .up(1'b1),
       .count(minutes)
   );
@@ -72,7 +70,7 @@ module hms_counter #(
       .WIDTH(W_HOURS)
   ) u_hour (
       .clk(clk),
-      .enable(enable && minute_rollover),
+      .enable(minute_rollover),
       .up(1'b1),
       .count(hours)
   );
