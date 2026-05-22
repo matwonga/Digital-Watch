@@ -42,8 +42,8 @@ module hms_counter #(
   logic second_rollover;
   logic minute_rollover;
 
-  assign second_rollover = (seconds == MaxSeconds);
-  assign minute_rollover = second_rollover && (minutes == MaxMinutes);
+  assign second_rollover = enable && (seconds == MaxSeconds);
+  assign minute_rollover = enable && second_rollover && (minutes == MaxMinutes);
 
   up_down_counter #(
       .MAX  (MaxSeconds),

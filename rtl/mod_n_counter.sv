@@ -1,14 +1,14 @@
 // mod_n_counter - implements a modulo-N counter
 //
 // Parameters:
-// N        - The modulo value for the counter
-// WIDTH    - The bit width of the counter output
+// N      - The modulo value for the counter
+// WIDTH  - The bit width of the counter output
 //
 // Ports:
-// clk                  - Clock signal
-// rst                  - Synchronous reset signal (active high)
-// enable               - When high, enables the counter to count on the next clock edge
-// count [WIDTH-1:0]    - Current count value, rolls over to 0 after reaching N-1
+// clk                - Clock signal
+// rst                - Synchronous reset signal
+// enable             - When high, enables the counter to count on the next clock edge
+// count [WIDTH-1:0]  - Current count value, rolls over to 0 after reaching N-1
 
 `timescale 1ns / 1ps
 

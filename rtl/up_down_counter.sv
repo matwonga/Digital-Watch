@@ -1,14 +1,14 @@
 // up_down_counter - display decoder for hexadecimal digits
 //
 // Parameters:
-// MAX      - Maximum value for the counter
-// WIDTH    - Binary width of the max value for the counter
+// MAX    - Maximum value for the counter
+// WIDTH  - Binary width of the max value for the counter
 //
 // Ports:
-// clk                  - Clock signal
-// enable               - When high, enables the counter
-// up                   - When high count increments, when low count decrements
-// count [WIDTH-1:0]    - Counter outputs
+// clk                - Clock signal
+// enable             - When high, enables the counter
+// up                 - When high count increments, when low count decrements
+// count [WIDTH-1:0]  - Counter outputs
 
 `timescale 1ns / 1ps
 

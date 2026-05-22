@@ -1,3 +1,13 @@
+// top_time_display_v1 - Top-level module for time display on 7-segment displays
+//
+// Parameters:
+// CYCLES_PER_SECOND - Number of clock cycles per second for the input clock
+//
+// Ports:
+// CLOCK_50         - 50 MHz clock input
+// SW [1:0]         - Switches to select the tick rate (00: 1Hz, 01: 25Hz, 10: 1kHz, 11: always on)
+// HEX5-HEX0 [6:0]  - Seven-segment display outputs for hours, minutes, and seconds
+
 `timescale 1ns / 1ps
 
 module top_time_display_v1 #(
@@ -12,19 +22,17 @@ module top_time_display_v1 #(
     output logic [6:0] HEX1,
     output logic [6:0] HEX0
 );
+
   logic tick_rate;
   logic tick_rate_1Hz;
   logic tick_rate_25Hz;
   logic tick_rate_1kHz;
+
   logic [4:0] hours;
-  logic [5:0] minutes;
-  logic [5:0] seconds;
-  logic [3:0] hour_tens;
-  logic [3:0] hour_ones;
-  logic [3:0] minute_tens;
-  logic [3:0] minute_ones;
-  logic [3:0] second_tens;
-  logic [3:0] second_ones;
+  logic [5:0] minutes, seconds;
+  logic [3:0] hour_tens, hour_ones;
+  logic [3:0] minute_tens, minute_ones;
+  logic [3:0] second_tens, second_ones;
 
   // Tick Rate Generator for 1Hz
   restartable_rate_generator #(
@@ -59,7 +67,7 @@ module top_time_display_v1 #(
       2'b00: tick_rate = tick_rate_1Hz;
       2'b01: tick_rate = tick_rate_25Hz;
       2'b10: tick_rate = tick_rate_1kHz;
-      2'b11: tick_rate = CLOCK_50;
+      2'b11: tick_rate = 1'b1;
     endcase
   end
 

@@ -3,8 +3,8 @@
 // CYCLE_COUNT - The number of clock cycles between ticks
 //
 // Ports:
-// clk - Clock signal
-// run - When high, restarts the counter and begins counting from zero on the next clock edge
+// clk  - Clock signal
+// run  - When high, restarts the counter and begins counting from zero on the next clock edge
 // tick - Output signal that goes high for one clock cycle when the counter reaches the specified cycle count
 
 `timescale 1ns / 1ps

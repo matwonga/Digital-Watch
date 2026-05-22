@@ -4,7 +4,7 @@
 // None
 //
 // Ports:
-// bin [6:0] - Binary input, 0-99
+// bin [6:0]  - Binary input, 0-99
 // tens [3:0] - Decimal tens digit (BCD)
 // ones [3:0] - Decimal ones digit (BCD)
 
