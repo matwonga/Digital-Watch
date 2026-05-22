@@ -1,6 +1,6 @@
 // restartable_rate_generator - A restartable rate generator, producing a tick signal for every specficied cycle count
 // Parameters:
-// CYCLE_COUNT - The number of clock cycles between ticks
+// CYCLE_COUNT - The number of clock cycles between ticks (default 2 for a tick every 2 clock cycles)
 //
 // Ports:
 // clk  - Clock signal

@@ -1,13 +1,13 @@
 // hms_counter - counter for hours, minutes, and seconds
 //
 // Parameters:
-// N_HOURS   - Number of hours (default 24)
-// N_MINUTES - Number of minutes (default 60)
-// N_SECONDS - Number of seconds (default 60)
+// N_HOURS   - Number of hours
+// N_MINUTES - Number of minutes
+// N_SECONDS - Number of seconds
 //
-// W_HOURS   - Bit width for hours output (default 5 for 0-23)
-// W_MINUTES - Bit width for minutes output (default 6 for 0-59)
-// W_SECONDS - Bit width for seconds output (default 6 for 0-59)
+// W_HOURS   - Bit width for hours output
+// W_MINUTES - Bit width for minutes output
+// W_SECONDS - Bit width for seconds output
 //
 // Ports:
 // clk                      - Clock signal
