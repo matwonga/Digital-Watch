@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------
 `timescale 1ns / 1ps
 
-module user_top_watch_v3 #(
+module user_top_watch_v4 #(
     /* verilator lint_off UNUSEDPARAM */
     parameter int CYCLES_PER_SECOND = 50_000_000
     /* verilator lint_on UNUSEDPARAM */
@@ -58,17 +58,21 @@ module user_top_watch_v3 #(
       .count(seconds)
   );
 
+  logic run;
   restartable_rate_generator #(
       .CYCLE_COUNT(CYCLES_PER_SECOND)
   ) u_divider_1_Hz (
       .clk (clk),
-      .run (1'b1),
+      .run (run),
       .tick(seconds_tick)
   );
 
+  // Accurate Time Setting Feature
+  assign run = !(seconds_edit && button[3]);
+
   assign seconds_edit = (mode_enable == 3'b001);
-  assign seconds_inc  = seconds_edit && button_pulse_inc;
-  assign seconds_dec  = seconds_edit && button_pulse_dec;
+  assign seconds_inc = seconds_edit && button_pulse_inc;
+  assign seconds_dec = seconds_edit && button_pulse_dec;
 
   // Minutes
   logic minutes_tick;
