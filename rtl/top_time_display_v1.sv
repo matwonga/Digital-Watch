@@ -23,18 +23,8 @@ module top_time_display_v1 #(
     output logic [6:0] HEX0
 );
 
-  logic tick_rate;
-  logic tick_rate_1Hz;
-  logic tick_rate_25Hz;
-  logic tick_rate_1kHz;
-
-  logic [4:0] hours;
-  logic [5:0] minutes, seconds;
-  logic [3:0] hour_tens, hour_ones;
-  logic [3:0] minute_tens, minute_ones;
-  logic [3:0] second_tens, second_ones;
-
   // Tick Rate Generator for 1Hz
+  logic tick_rate_1Hz;
   restartable_rate_generator #(
       .CYCLE_COUNT(CYCLES_PER_SECOND / 1)
   ) u_rate_generator_1Hz (
@@ -44,6 +34,7 @@ module top_time_display_v1 #(
   );
 
   // Tick Rate Generator for 25Hz
+  logic tick_rate_25Hz;
   restartable_rate_generator #(
       .CYCLE_COUNT(CYCLES_PER_SECOND / 25)
   ) u_rate_generator_25Hz (
@@ -53,6 +44,7 @@ module top_time_display_v1 #(
   );
 
   // Tick Rate Generator for 1kHz
+  logic tick_rate_1kHz;
   restartable_rate_generator #(
       .CYCLE_COUNT(CYCLES_PER_SECOND / 1000)
   ) u_rate_generator_1kHz (
@@ -62,6 +54,7 @@ module top_time_display_v1 #(
   );
 
   // Select the tick rate based on the switch input
+  logic tick_rate;
   always_comb begin
     unique case (SW)
       2'b00: tick_rate = tick_rate_1Hz;
@@ -72,6 +65,8 @@ module top_time_display_v1 #(
   end
 
   // HMS Counter depending on the tick rate
+  logic [4:0] hours;
+  logic [5:0] minutes, seconds;
   hms_counter u_hms_counter (
       .clk(CLOCK_50),
       .enable(tick_rate),
@@ -81,18 +76,17 @@ module top_time_display_v1 #(
   );
 
   // Binary to BCD for hours
+  logic [3:0] hour_tens, hour_ones;
   binary_to_bcd u_binary_to_bcd_hours (
       .bin ({2'b0, hours}),
       .tens(hour_tens),
       .ones(hour_ones)
   );
-
   seven_segment u_seven_segment_hours_tens (
       .digit(hour_tens),
       .blank(1'b0),
       .segments(HEX5)
   );
-
   seven_segment u_seven_segment_hours_ones (
       .digit(hour_ones),
       .blank(1'b0),
@@ -100,18 +94,17 @@ module top_time_display_v1 #(
   );
 
   // Binary to BCD for minutes
+  logic [3:0] minute_tens, minute_ones;
   binary_to_bcd u_binary_to_bcd_minutes (
       .bin ({1'b0, minutes}),
       .tens(minute_tens),
       .ones(minute_ones)
   );
-
   seven_segment u_seven_segment_minutes_tens (
       .digit(minute_tens),
       .blank(1'b0),
       .segments(HEX3)
   );
-
   seven_segment u_seven_segment_minutes_ones (
       .digit(minute_ones),
       .blank(1'b0),
@@ -119,18 +112,17 @@ module top_time_display_v1 #(
   );
 
   // Binary to BCD for seconds
+  logic [3:0] second_tens, second_ones;
   binary_to_bcd u_binary_to_bcd_seconds (
       .bin ({1'b0, seconds}),
       .tens(second_tens),
       .ones(second_ones)
   );
-
   seven_segment u_seven_segment_seconds_tens (
       .digit(second_tens),
       .blank(1'b0),
       .segments(HEX1)
   );
-
   seven_segment u_seven_segment_seconds_ones (
       .digit(second_ones),
       .blank(1'b0),

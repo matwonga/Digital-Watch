@@ -22,7 +22,7 @@ module seven_segment #(
 
   always_comb begin
     if (blank) begin
-      segments_active_high = 7'b0000000;  // All segments off
+      segments_active_high = '0;  // All segments off
     end else begin
       unique case (digit)
         4'h0: segments_active_high = 7'b0111111;  // a,b,c,d,e,f

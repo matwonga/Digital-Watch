@@ -15,14 +15,14 @@ module arming_latch (
     input  logic clk,
     input  logic arm,
     input  logic disarm,
-    output logic armed = 1'b0
+    output logic armed = '0
 );
 
   always_ff @(posedge clk) begin
     if (disarm) begin
-      armed <= 1'b0;
+      armed <= '0;
     end else if (arm) begin
-      armed <= 1'b1;
+      armed <= '1;
     end
   end
 
