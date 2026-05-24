@@ -49,14 +49,18 @@ async def test_timepiece_mux(dut):
     # Section 1: output routing  -- sw[1:0] selects the correct app
     # -----------------------------------------------------------------------
 
-    cocotb.log.info(f"Section 1: sw[1:0]=00 (watch)  -- wait {CPS} cycles, expect seconds=1")
+    cocotb.log.info(
+        f"Section 1: sw[1:0]=00 (watch)  -- wait {CPS} cycles, expect seconds=1"
+    )
     await tick_n(dut, CPS)
     assert int(dut.seconds_disp.value) == 1, (
         f"sw[1:0]=00 (watch): expected seconds=1 after {CPS} cycles, "
         f"got {int(dut.seconds_disp.value)}"
     )
 
-    cocotb.log.info("Section 1: sw[1:0]=01 (stopwatch)  -- not started, expect seconds=0")
+    cocotb.log.info(
+        "Section 1: sw[1:0]=01 (stopwatch)  -- not started, expect seconds=0"
+    )
     dut.sw.value = 0b01
     await tick(dut)
     assert int(dut.seconds_disp.value) == 0, (
@@ -68,8 +72,7 @@ async def test_timepiece_mux(dut):
     dut.sw.value = 0b11
     await tick(dut)
     assert int(dut.seconds_disp.value) == 0, (
-        f"sw[1:0]=11 (timer): expected seconds=0, "
-        f"got {int(dut.seconds_disp.value)}"
+        f"sw[1:0]=11 (timer): expected seconds=0, got {int(dut.seconds_disp.value)}"
     )
 
     cocotb.log.info("Section 1: sw[1:0]=10 (watch/default)  -- expect seconds>=1")
@@ -179,7 +182,9 @@ async def test_timepiece_mux(dut):
         f"Stopwatch elapsed_seconds={int(dut.minutes_disp.value)} after {CPS} cycles: "
         "stopwatch did not start  -- button[0] not reaching the active app"
     )
-    cocotb.log.info(f"Section 3: stopwatch running  -- elapsed_seconds={int(dut.minutes_disp.value)}")
+    cocotb.log.info(
+        f"Section 3: stopwatch running  -- elapsed_seconds={int(dut.minutes_disp.value)}"
+    )
 
     # -----------------------------------------------------------------------
     # Section 4: continuous run  -- inactive apps keep running while not shown
@@ -187,7 +192,9 @@ async def test_timepiece_mux(dut):
 
     # Watch has been running since t=0. Switch to stopwatch for a full second,
     # then return; the watch must have advanced by one more second.
-    cocotb.log.info("Section 4: record watch seconds, leave for one second in stopwatch")
+    cocotb.log.info(
+        "Section 4: record watch seconds, leave for one second in stopwatch"
+    )
     dut.sw.value = 0b00  # MODE_WATCH
     await tick(dut)
     watch_before = int(dut.seconds_disp.value)
@@ -202,7 +209,9 @@ async def test_timepiece_mux(dut):
         f"Watch went from {watch_before}s to {watch_after}s after {CPS} cycles away: "
         "expected exactly +1s  -- watch may have paused while inactive"
     )
-    cocotb.log.info(f"Section 4: watch advanced {watch_before}s -> {watch_after}s while inactive")
+    cocotb.log.info(
+        f"Section 4: watch advanced {watch_before}s -> {watch_after}s while inactive"
+    )
 
     # -----------------------------------------------------------------------
     # Section 5: state preserved  -- app state survives a mode switch away and back
