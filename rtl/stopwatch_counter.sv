@@ -1,15 +1,16 @@
-// cascade_counter - A counter that cascades three sub-counters together
+// stopwatch_counter - A stopwatch counter that counts minutes, seconds, and centiseconds (hundredths of a second).
 //
 // Parameters:
-// N2, N1, N0 - Maximum count values for the three sub-counters
-// W2, W1, W0 - Output widths for the three sub-counters
+// CYCLES_PER_SECOND - The number of clock cycles in one second
+//
 // Ports:
-// clk        - Clock signal
-// rst        - Synchronous reset signal
-// enable     - When high, enables the counter
-// count2     - Output of the most significant sub-counter
-// count1     - Output of the middle sub-counter
-// count0     - Output of the least significant sub-counter
+// clk      - Clock signal
+// rst      - Reset signal (active high)
+// enable    - Enable signal for counting (active high)
+// minutes   - Output for minutes (0-99)
+// seconds   - Output for seconds (0-59)
+// centiseconds - Output for centiseconds (0-99)
+
 
 `timescale 1ns / 1ps
 
@@ -21,15 +22,15 @@ module stopwatch_counter #(
     input logic enable,
     output logic [6:0] minutes,
     output logic [5:0] seconds,
-    output logic [6:0] centiseconds  // hundredths of a second
+    output logic [6:0] centiseconds
 );
 
   logic tick;
 
   cascade_counter #(
-      .N0(100),  // Centiseconds
-      .N1(60),   // Seconds
-      .N2(100),  // Minutes
+      .N0(100),
+      .N1(60),
+      .N2(100),
       .W2(7),
       .W1(6),
       .W0(7)
